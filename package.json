@@ -1,0 +1,17 @@
+{
+  "name": "missblossom-whatsapp-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp Bot untuk Miss Blossom Book Store",
+  "main": "whatsapp_bot.js",
+  "scripts": {
+    "start": "node whatsapp_bot.js"
+  },
+  "keywords": ["whatsapp", "bot", "book", "store"],
+  "author": "Miss Blossom",
+  "license": "MIT",
+  "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
+    "qrcode-terminal": "^0.12.0",
+    "xlsx": "^0.18.5"
+  }
+}

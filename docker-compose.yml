@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  whatsapp-bot:
+    build: .
+    container_name: missblossom-wa-bot
+    restart: unless-stopped
+    volumes:
+      # Persist WhatsApp session
+      - ./wwebjs_auth:/app/.wwebjs_auth
+      - ./wwebjs_cache:/app/.wwebjs_cache
+      # Mount Excel database
+      - ./REKAP BUKU MISSBLOSSOM.xlsx:/app/REKAP BUKU MISSBLOSSOM.xlsx:ro
+    environment:
+      - NODE_ENV=production
+    # Optional: health check
+    healthcheck:
+      test: ["CMD", "node", "-e", "process.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
