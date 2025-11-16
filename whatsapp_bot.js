@@ -28,7 +28,8 @@ function loadBukuDatabase() {
             harga: row['Unnamed: 14'] || 0,
             deskripsi: row['deskripsi'] || '',
             link: row['Link'] || '',
-            cover: row['Unnamed: 10'] || ''
+            cover: row['Unnamed: 10'] || '',
+            drivePdf: row['Link'] || '' // Kolom D untuk link Google Drive PDF
         }));
         
         console.log(`✓ Database loaded: ${bukuDatabase.length} buku`);
@@ -98,11 +99,13 @@ Saya adalah asisten virtual yang siap membantu Anda mencari buku.
 • Ketik kategori (misal: "programming", "business")
 • Ketik "/kategori" untuk lihat semua kategori
 • Ketik "/info" untuk informasi toko
+• Ketik "drive" atau "pdf" untuk link download
 
 *Contoh:*
-- "python"
-- "john maxwell"
-- "storytelling"
+- "python" → cari buku Python
+- "john maxwell" → cari buku dari author
+- "1" → lihat detail buku nomor 1
+- "drive" → dapatkan link Google Drive PDF
 
 💡 *Tips:* Ketik "halo miss blossom" kapan saja untuk melihat menu ini lagi.
 
@@ -211,11 +214,34 @@ Ketik judul atau kategori untuk mulai mencari! 🔍`;
                 response += `🖼️ *Cover Buku:* ${buku.cover}\n\n`;
             }
             
+            if (buku.drivePdf) {
+                response += `📄 *Link Google Drive PDF:*\n${buku.drivePdf}\n\n`;
+                response += `💡 _Ketik "drive" atau "pdf" untuk mendapatkan link download_\n\n`;
+            }
+            
             response += `📱 *Untuk pemesanan, hubungi:*\nWhatsApp: 082141733187`;
             
             await message.reply(response);
             return;
         }
+    }
+    
+    // Jika customer minta drive/pdf dari hasil search terakhir
+    if ((pesan === 'drive' || pesan === 'pdf' || pesan === 'link') && chat.lastSearchResults) {
+        let response = `📄 *Link Google Drive PDF:*\n\n`;
+        
+        chat.lastSearchResults.slice(0, 10).forEach((buku, index) => {
+            const judulBersih = extractJudulBersih(buku.judul);
+            if (buku.drivePdf) {
+                response += `*${index + 1}. ${judulBersih}*\n`;
+                response += `${buku.drivePdf}\n\n`;
+            }
+        });
+        
+        response += `💡 _Klik link untuk download buku dari Google Drive_`;
+        
+        await message.reply(response);
+        return;
     }
     
     // Default response
