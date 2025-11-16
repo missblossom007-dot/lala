@@ -89,9 +89,9 @@ client.on('message', async (message) => {
     
     // Command: halo miss blossom
     if (pesan === 'halo miss blossom' || pesan === '/start' || pesan === 'halo' || pesan === 'hi' || pesan === 'hello') {
-        const response = `👋 *Halo! Selamat datang di Miss Blossom Book Store*
+        const response = `👋 *Halo! Selamat datang di DigiMetaShop*
 
-Saya adalah asisten virtual yang siap membantu Anda mencari buku.
+Saya adalah asisten virtual yang siap membantu Anda mencari buku digital.
 
 📚 *Cara Menggunakan Bot:*
 • Ketik judul buku yang dicari
@@ -107,7 +107,7 @@ Saya adalah asisten virtual yang siap membantu Anda mencari buku.
 - "1" → lihat detail buku nomor 1
 - "drive" → dapatkan link Google Drive PDF
 
-💡 *Tips:* Ketik "halo miss blossom" kapan saja untuk melihat menu ini lagi.
+💡 *Tips:* Ketik "halo" kapan saja untuk melihat menu ini lagi.
 
 Silakan ketik apa yang Anda cari! 😊`;
         
@@ -125,8 +125,9 @@ Silakan ketik apa yang Anda cari! 😊`;
     
     // Command: /info
     if (pesan === '/info') {
-        const response = `ℹ️ *Miss Blossom Book Store*
+        const response = `ℹ️ *DigiMetaShop*
 
+🌐 Website: www.digimetashop.com
 📚 Total Koleksi: ${bukuDatabase.length.toLocaleString()} buku digital
 💰 Harga: Rp 25.000 - Rp 250.000
 📱 WhatsApp: 082141733187
