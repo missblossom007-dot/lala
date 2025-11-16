@@ -184,6 +184,20 @@ Ketik judul atau kategori untuk mulai mencari! 🔍`;
             const buku = chat.lastSearchResults[index];
             const judulBersih = extractJudulBersih(buku.judul);
             
+            // Kirim cover buku jika ada
+            if (buku.cover && buku.cover.trim() !== '') {
+                try {
+                    const { MessageMedia } = require('whatsapp-web.js');
+                    const media = await MessageMedia.fromUrl(buku.cover);
+                    await client.sendMessage(message.from, media, {
+                        caption: `📖 *${judulBersih}*`
+                    });
+                } catch (error) {
+                    console.log('Error sending cover image:', error);
+                    // Lanjut kirim text jika gambar gagal
+                }
+            }
+            
             let response = `📖 *${judulBersih}*\n\n`;
             response += `👤 *Author:* ${buku.author}\n`;
             response += `📂 *Kategori:* ${buku.kategori}\n`;
@@ -194,7 +208,7 @@ Ketik judul atau kategori untuk mulai mencari! 🔍`;
             }
             
             if (buku.link) {
-                response += `🔗 *Link:* ${buku.link}\n\n`;
+                response += `🔗 *Link Download:* ${buku.link}\n\n`;
             }
             
             response += `📱 *Untuk pemesanan, hubungi:*\nWhatsApp: 082141733187`;
