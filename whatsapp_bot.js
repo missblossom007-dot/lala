@@ -157,8 +157,8 @@ Ketik judul atau kategori untuk mulai mencari! 🔍`;
             response += `   👤 ${buku.author}\n`;
             response += `   📂 ${buku.kategori}\n`;
             response += `   💰 ${formatHarga(buku.harga)}\n`;
-            if (buku.link) {
-                response += `   🔗 ${buku.link}\n`;
+            if (buku.cover) {
+                response += `   🖼️ ${buku.cover}\n`;
             }
             response += `\n`;
         });
@@ -207,8 +207,8 @@ Ketik judul atau kategori untuk mulai mencari! 🔍`;
                 response += `📝 *Deskripsi:*\n${buku.deskripsi.substring(0, 300)}...\n\n`;
             }
             
-            if (buku.link) {
-                response += `🔗 *Link Download:* ${buku.link}\n\n`;
+            if (buku.cover) {
+                response += `🖼️ *Cover Buku:* ${buku.cover}\n\n`;
             }
             
             response += `📱 *Untuk pemesanan, hubungi:*\nWhatsApp: 082141733187`;
